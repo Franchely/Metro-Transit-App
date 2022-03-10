@@ -14,13 +14,13 @@
   background-color: red;
 }
 
-/* .form-container {
+.form-container {
   display: flex;
   justify-content: center;
   flex-direction: column;
   margin-left: 200px;
   margin-right: 200px;
-} */
+}
 
 .search-form {
   display: flex;
