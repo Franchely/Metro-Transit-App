@@ -15,7 +15,7 @@ export default function StopsInput(props) {
             setStopOptions(stops);
           }
         );
-    }, [])
+    }, [props.selectedDirection])
 
     const handleStopSelect = (event) => {
         var stop = document.getElementsByName(event.target.value)
@@ -37,8 +37,12 @@ export default function StopsInput(props) {
             className='input'
             id='select-stop'
             onChange={e => handleStopSelect(e)}
-            value={selectedStop}
         >     
+
+            <option disabled selected>
+                Select Stop...
+            </option>
+
             {stopOptions.map((option) => {
                 return <option value={option.Text} name={option.Text} id={option.Value} key={option.Value}>{option.Text}</option>;
             })}

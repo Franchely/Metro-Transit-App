@@ -18,12 +18,13 @@ export default function DirectionInput(props) {
             setDirectionOptions(directions);
           }
         );
-    }, [])
+    }, [props.selectedRoute])
 
     const handleDirectionSelect = (event) => {
         var direction = document.getElementsByName(event.target.value)
         setSelectedDirection(direction[0].id)
         setShowStops(true)
+        console.log("selected direction:", direction[0].id)
     }
 
     if (!directionOptions)
@@ -39,8 +40,11 @@ export default function DirectionInput(props) {
             className='input'
             id='select-direction'
             onChange={e => handleDirectionSelect(e)}
-            value={selectedDirection}
         >     
+            <option disabled selected>
+                Select Direction...
+            </option>
+
             {directionOptions.map((option) => {
                 return <option value={option.Text} name={option.Text} id={option.Value} key={option.Value}>{option.Text}</option>;
             })}

@@ -7,6 +7,7 @@ export default function Form(props) {
     const [routeOptions, setRouteOptions] = useState(null)
     const [selectedRoute, setSelectedRoute] = useState(null)
     const [showDirections, setShowDirections] = useState(false)
+    const [changeRoute, setChangeRoute] = useState(null)
 
     const [stop, setStop] = useState([])
     const [allSelected, setAllSelected] = useState(false)
@@ -24,8 +25,11 @@ export default function Form(props) {
 
     const handleRouteSelect = (event) => {
         var route = document.getElementsByName(event.target.value)
+
         setSelectedRoute(route[0].id)
         setShowDirections(true)
+        console.log("selected route 1:", route[0].id)
+
     }
 
     
@@ -44,8 +48,10 @@ export default function Form(props) {
             className='input'
             id='select-route'
             onChange={e => handleRouteSelect(e)}
-            value={selectedRoute}
         >
+            <option disabled selected>
+                Select Route...
+            </option>
             
             {routeOptions.map((option) => {
                 return <option value={option.Description} name={option.Description} id={option.Route} key={option.Route}>{option.Description}</option>;
