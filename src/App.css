@@ -1,31 +1,50 @@
 .body {
-  background-color: darkblue;
+  background-color: white;
 }
 
 .navbar {
-  background-color: white;
-  padding: 30px;
+  background-color: rgba(255, 212, 22, 0.781);
+  padding: 20px;
   color: darkblue;
+  margin-bottom: 40px;
+  border-bottom: 2px solid rgb(192, 8, 8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .home-link {
   text-decoration: none;
-  padding: 10px;
-  background-color: red;
+  border-radius: 3px;
+  border: 2px solid rgb(192, 8, 8);
+  color: rgb(192, 8, 8);
+  margin: 0 1em;
+  padding: 0.25em 1em;
 }
 
 .form-container {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin-left: 200px;
-  margin-right: 200px;
+  align-items: center;
+}
+
+.form-span {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(40, 40, 156);
+  margin: 20px;
+  padding: 30px;
+  box-shadow: 10px 10px 10px grey;
+  border: 2px solid rgb(192, 8, 8);
 }
 
 .search-form {
   display: flex;
   flex-direction: column;
-  padding: 5px;
 }
 
 .form-title {
@@ -36,9 +55,18 @@
 
 .input {
   margin: 5px;
-  font-size: 30px;
+  font-size: 20px;
+  width: 250px;
+  overflow: auto;
 }
 
-.placeholder-value {
-  color: lightgray;
+.submit-button {
+  display: flex;
+  flex-direction: column;
+  border-radius: 3px;
+  border: 2px solid rgb(192, 8, 8);
+  color: rgb(192, 8, 8);
+  margin: 0 1em;
+  padding: 0.25em 1em;
+  width: 30px;
 }
