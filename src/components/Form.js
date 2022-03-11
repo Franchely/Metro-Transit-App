@@ -2,15 +2,11 @@ import React, { useState, useEffect} from 'react'
 import DirectionInput from './DirectionInput'
 import Axios from "axios"
 
-export default function Form(props) {
+export default function Form() {
 
     const [routeOptions, setRouteOptions] = useState(null)
     const [selectedRoute, setSelectedRoute] = useState(null)
     const [showDirections, setShowDirections] = useState(false)
-    const [changeRoute, setChangeRoute] = useState(null)
-
-    const [stop, setStop] = useState([])
-    const [allSelected, setAllSelected] = useState(false)
 
     // Get list of routes
     useEffect(() => {
@@ -42,8 +38,8 @@ export default function Form(props) {
 
   return (
     <div className="form-container">
+        <span className='form-span'>
         <h2 className="form-title">Search By Route</h2>
-
         <select
             className='input'
             id='select-route'
@@ -64,6 +60,7 @@ export default function Form(props) {
             :
             null
         }
+        </span>
 
     </div>
   )

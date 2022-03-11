@@ -3,20 +3,20 @@ import './App.css';
 import {BrowserRouter, Routes, Route, Link} from 'react-router-dom'
 import Home from './pages/Home'
 import ErrorPage from './pages/ErrorPage';
-import BusRoute from './pages/BusRoute';
+import RouteInfo from './pages/RouteInfo';
 
 function App() {
   return (
     <BrowserRouter>
       <div className='navbar'>
-        <h1>Metro Transit App</h1>
+        <h1>NexTrip</h1>
         <Link to="/" className='home-link'>Home</Link>
 
       </div>
       <div className='body'>
       <Routes>
         <Route path="/" element={<Home />}/>
-        <Route path="/businfo" element={<BusRoute />}/>
+        <Route path="/nextrip" element={<RouteInfo />}/>
         <Route path="*" element={<ErrorPage />}/>
       </Routes>
       </div>
