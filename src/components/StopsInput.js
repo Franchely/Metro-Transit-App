@@ -7,7 +7,7 @@ export default function StopsInput(props) {
     const [stopOptions, setStopOptions] = useState(null)
     const [selectedStop, setSelectedStop] = useState(null)
     const [allSelected, setAllSelected] = useState(false)
-    const [departures, setDepartures] = useState(null)
+    // const [departures, setDepartures] = useState(null)
 
     // Get list of stops
     useEffect(() => {
@@ -19,18 +19,18 @@ export default function StopsInput(props) {
         );
     }, [props.selectedDirection])
 
-    // Get departures for selected stop
-    useEffect(() => {
-        if (allSelected === true) {
-            Axios.get(`https://svc.metrotransit.org/NexTrip/${props.selectedRoute}/${props.selectedDirection}/${selectedStop}?format=json`).then(
-              (response) => {
-                const data = response.data;
-                console.log("departures array:", data)
-                setDepartures(data);
-              }
-            );
-        }
-    }, [allSelected])
+    // // Get departures for selected stop
+    // useEffect(() => {
+    //     if (allSelected === true) {
+    //         Axios.get(`https://svc.metrotransit.org/NexTrip/${props.selectedRoute}/${props.selectedDirection}/${selectedStop}?format=json`).then(
+    //           (response) => {
+    //             const data = response.data;
+    //             console.log("departures array:", data)
+    //             setDepartures(data);
+    //           }
+    //         );
+    //     }
+    // }, [allSelected])
 
     const handleStopSelect = (event) => {
         var stop = document.getElementsByName(event.target.value)
@@ -63,13 +63,13 @@ export default function StopsInput(props) {
             })}
         </select> 
 
-        {departures != null ? 
+        {allSelected === true ? 
         
         // console.log("usestate departures:", departures)
 
         <Link to={{
-            pathname: "/departures",
-            state: {departures}
+            pathname: `/departures/${props.selectedRoute}/${props.selectedDirection}/${selectedStop}`,
+            // state: {departures}
         }} 
             className='submit-button'
         >

@@ -2,26 +2,7 @@ import React from 'react'
 
 export default function RouteInfoTable(props) {
 
-    console.log("departures prop 2:", props.departures)
-
-    // const renderDepartures = () => {
-    //     props.departures.map(departure => {
-    //         return <tr className='departure'>
-    //                     <td className='departure-route'>
-    //                         {departure.Terminal ? 
-    //                         `${departure.Route}${departure.Terminal}` 
-    //                          : 
-    //                          departure.Route}
-    //                     </td>
-    //                     <td className='departure-name'>
-    //                         {departure.Description}
-    //                     </td>
-    //                     <td className='departure-time'>
-    //                         {departure.Text}
-    //                     </td>
-    //                </tr>
-    //     })
-    // }
+    console.log("departures prop:", props.departures)
 
     if (!props.departures)
     return (
@@ -48,22 +29,23 @@ export default function RouteInfoTable(props) {
             </thead>
             <tbody className='route-info-table-body'>
                 {
-                    // props.departures.map(departure => {
-                    //     return <tr className='departure'>
-                    //                 <td className='departure-route'>
-                    //                     {departure.Terminal ? 
-                    //                     `${departure.Route}${departure.Terminal}` 
-                    //                      : 
-                    //                      departure.Route}
-                    //                 </td>
-                    //                 <td className='departure-name'>
-                    //                     {departure.Description}
-                    //                 </td>
-                    //                 <td className='departure-time'>
-                    //                     {departure.Text}
-                    //                 </td>
-                    //            </tr>
-                    // })
+                    props.departures.map(departure => {
+                        return <tr className='departure'>
+                                    <td className='departure-route'>
+                                        {departure.Terminal ? 
+                                        `${departure.Route}${departure.Terminal}` 
+                                         : 
+                                         departure.Route}
+                                    </td>
+                                    <td className='departure-name'>
+                                        {departure.Description}
+                                    </td>
+                                    <td className='departure-time'>
+                                        {departure.DepartureText}
+                                        
+                                    </td>
+                               </tr>
+                    })
                 }
             </tbody>
         </table>

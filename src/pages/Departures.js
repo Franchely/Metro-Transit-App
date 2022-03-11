@@ -1,16 +1,35 @@
 import React, { useState, useEffect} from 'react'
 import DeparturesTable from '../components/DeparturesTable'
-import {useLocation} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
+import Axios from 'axios'
 
 export default function Departures(props) {
 
-  // console.log("departures prop 1:", props.departures)
-  // console.log(props.selectedStop)
-  console.log(useLocation())
+  const [departures, setDepartures] = useState(null)
+
+  let params = useParams()
+
+  useEffect(() => {
+        Axios.get(`https://svc.metrotransit.org/NexTrip/${params.route}/${params.direction}/${params.stop}?format=json`).then(
+          (response) => {
+            const data = response.data;
+            console.log("departures array:", data)
+            setDepartures(data);
+          }
+        );
+}, [])
+
+  if (!departures)
+  return (
+    <div>
+      <p>Loading...</p>
+    </div>
+  );
+
 
   return (
     <div>
-      {/* <DeparturesTable selectedStop={props.selectedStop} departures={props.departures} /> */}
+        <DeparturesTable selectedStop={params.stop} departures={departures} />
     </div>
   )
 }

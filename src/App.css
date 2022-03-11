@@ -80,12 +80,17 @@
 .route-info-table {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   margin-top: 30px;
   border: 2px solid rgb(192, 8, 8);
 }
 
 thead {
   background-color: rgb(40, 40, 156);
+  font-size: 20px;
+}
+tbody {
+  background-color: rgb(236, 230, 207);
   font-size: 20px;
 }
 
@@ -95,5 +100,13 @@ th {
 }
 
 th + th {
+  padding-left: 150px;
+}
+
+td {
+  padding: 10px;
+}
+
+td + td {
   padding-left: 150px;
 }
