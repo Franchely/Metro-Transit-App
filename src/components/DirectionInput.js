@@ -24,7 +24,6 @@ export default function DirectionInput(props) {
         var direction = document.getElementsByName(event.target.value)
         setSelectedDirection(direction[0].id)
         setShowStops(true)
-        console.log("selected direction:", direction[0].id)
     }
 
     if (!directionOptions)

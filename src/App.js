@@ -3,7 +3,7 @@ import './App.css';
 import {BrowserRouter, Routes, Route, Link} from 'react-router-dom'
 import Home from './pages/Home'
 import ErrorPage from './pages/ErrorPage';
-import RouteInfo from './pages/RouteInfo';
+import Departures from './pages/Departures';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
       <div className='body'>
       <Routes>
         <Route path="/" element={<Home />}/>
-        <Route path="/nextrip" element={<RouteInfo />}/>
+        <Route path="/departures/:route/:direction/:stop" element={<Departures />}/>
         <Route path="*" element={<ErrorPage />}/>
       </Routes>
       </div>

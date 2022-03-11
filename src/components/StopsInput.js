@@ -7,26 +7,26 @@ export default function StopsInput(props) {
     const [stopOptions, setStopOptions] = useState(null)
     const [selectedStop, setSelectedStop] = useState(null)
     const [allSelected, setAllSelected] = useState(false)
-    const [routeData, setRouteData] = useState(null)
+    const [departures, setDepartures] = useState(null)
 
     // Get list of stops
     useEffect(() => {
         Axios.get(`https://svc.metrotransit.org/NexTrip/Stops/${props.selectedRoute}/${props.selectedDirection}?format=json`).then(
           (response) => {
             const stops = response.data;
-            console.log(stops)
             setStopOptions(stops);
           }
         );
     }, [props.selectedDirection])
 
+    // Get departures for selected stop
     useEffect(() => {
         if (allSelected === true) {
             Axios.get(`https://svc.metrotransit.org/NexTrip/${props.selectedRoute}/${props.selectedDirection}/${selectedStop}?format=json`).then(
               (response) => {
                 const data = response.data;
-                console.log(data)
-                setRouteData(data);
+                console.log("departures array:", data)
+                setDepartures(data);
               }
             );
         }
@@ -35,7 +35,6 @@ export default function StopsInput(props) {
     const handleStopSelect = (event) => {
         var stop = document.getElementsByName(event.target.value)
         setSelectedStop(stop[0].id)
-        console.log(stop[0].id)
         setAllSelected(true)
     }
 
@@ -64,16 +63,21 @@ export default function StopsInput(props) {
             })}
         </select> 
 
-        {selectedStop === null ? null 
+        {departures != null ? 
         
-        : 
+        // console.log("usestate departures:", departures)
 
-        <Link to="/nextrip" 
+        <Link to={{
+            pathname: "/departures",
+            state: {departures}
+        }} 
             className='submit-button'
-            routeData={routeData}
         >
             Submit
         </Link>
+        : 
+
+        null
 
         }
 

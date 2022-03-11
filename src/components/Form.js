@@ -24,7 +24,6 @@ export default function Form() {
 
         setSelectedRoute(route[0].id)
         setShowDirections(true)
-        console.log("selected route 1:", route[0].id)
 
     }
 
