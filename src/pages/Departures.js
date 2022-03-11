@@ -7,16 +7,19 @@ export default function Departures(props) {
 
   const [departures, setDepartures] = useState(null)
 
-  let params = useParams()
+  const params = useParams()
+  const location = useLocation()
 
   useEffect(() => {
         Axios.get(`https://svc.metrotransit.org/NexTrip/${params.route}/${params.direction}/${params.stop}?format=json`).then(
           (response) => {
             const data = response.data;
-            console.log("departures array:", data)
             setDepartures(data);
           }
-        );
+        ).catch(error => {
+          window.alert("An error occurred. Please return to the home page.")
+          console.log(error)
+        });
 }, [])
 
   if (!departures)
@@ -29,6 +32,9 @@ export default function Departures(props) {
 
   return (
     <div>
+      <span className='stop-name'>
+        {location.state.stopName}
+      </span>
         <DeparturesTable selectedStop={params.stop} departures={departures} />
     </div>
   )

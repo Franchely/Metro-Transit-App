@@ -1,13 +1,11 @@
 import React from 'react'
 
-export default function RouteInfoTable(props) {
-
-    console.log("departures prop:", props.departures)
+export default function DeparturesTable(props) {
 
     if (!props.departures)
     return (
       <div>
-        <p>No upcoming departures found.</p>
+        <p className='no-departures'>No upcoming departures found.</p>
       </div>
     );
 
@@ -29,8 +27,8 @@ export default function RouteInfoTable(props) {
             </thead>
             <tbody className='route-info-table-body'>
                 {
-                    props.departures.map(departure => {
-                        return <tr className='departure'>
+                    props.departures.map((departure, index) => {
+                        return <tr className='departure' key={index}>
                                     <td className='departure-route'>
                                         {departure.Terminal ? 
                                         `${departure.Route}${departure.Terminal}` 

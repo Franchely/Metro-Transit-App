@@ -17,7 +17,10 @@ export default function DirectionInput(props) {
             const directions = response.data;
             setDirectionOptions(directions);
           }
-        );
+        ).catch(error => {
+            window.alert("An error occurred. Please refresh the page.")
+            console.log(error)
+          });
     }, [props.selectedRoute])
 
     const handleDirectionSelect = (event) => {

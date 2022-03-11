@@ -6,6 +6,7 @@ export default function StopsInput(props) {
 
     const [stopOptions, setStopOptions] = useState(null)
     const [selectedStop, setSelectedStop] = useState(null)
+    const [stopName, setStopName] = useState(null)
     const [allSelected, setAllSelected] = useState(false)
     // const [departures, setDepartures] = useState(null)
 
@@ -16,25 +17,16 @@ export default function StopsInput(props) {
             const stops = response.data;
             setStopOptions(stops);
           }
-        );
+        ).catch(error => {
+            window.alert("An error occurred. Please refresh the page.")
+            console.log(error)
+          });
     }, [props.selectedDirection])
-
-    // // Get departures for selected stop
-    // useEffect(() => {
-    //     if (allSelected === true) {
-    //         Axios.get(`https://svc.metrotransit.org/NexTrip/${props.selectedRoute}/${props.selectedDirection}/${selectedStop}?format=json`).then(
-    //           (response) => {
-    //             const data = response.data;
-    //             console.log("departures array:", data)
-    //             setDepartures(data);
-    //           }
-    //         );
-    //     }
-    // }, [allSelected])
 
     const handleStopSelect = (event) => {
         var stop = document.getElementsByName(event.target.value)
         setSelectedStop(stop[0].id)
+        setStopName(stop[0].value)
         setAllSelected(true)
     }
 
@@ -46,7 +38,7 @@ export default function StopsInput(props) {
     );
 
   return (
-    <div>
+    <div className='stops-and-button'>
         
         <select
             className='input'
@@ -63,23 +55,17 @@ export default function StopsInput(props) {
             })}
         </select> 
 
-        {allSelected === true ? 
-        
-        // console.log("usestate departures:", departures)
-
-        <Link to={{
-            pathname: `/departures/${props.selectedRoute}/${props.selectedDirection}/${selectedStop}`,
-            // state: {departures}
-        }} 
-            className='submit-button'
-        >
-            Submit
-        </Link>
+        {allSelected === true && !!stopName ?  
+             <Link to={{
+                pathname: `/departures/${props.selectedRoute}/${props.selectedDirection}/${selectedStop}`
+             }}
+                state={{stopName: stopName}} 
+                className='submit-button'
+            >
+                Submit
+            </Link>
         : 
-
-        null
-
-        }
+        null}
 
         
     </div>

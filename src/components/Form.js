@@ -15,8 +15,11 @@ export default function Form() {
             const routes = response.data;
             setRouteOptions(routes);
           }
-        );
-      }, []);
+        ).catch(error => {
+          window.alert("An error occurred. Please refresh the page.")
+          console.log(error)
+        });
+      }, [])
 
 
     const handleRouteSelect = (event) => {
