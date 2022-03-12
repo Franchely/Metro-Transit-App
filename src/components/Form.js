@@ -45,14 +45,24 @@ export default function Form() {
         <select
             className='input'
             id='select-route'
+            role="select"
             onChange={e => handleRouteSelect(e)}
+            data-testid="select-route"
         >
-            <option disabled selected>
+            <option disabled selected role="option">
                 Select Route...
             </option>
             
             {routeOptions.map((option) => {
-                return <option value={option.Description} name={option.Description} id={option.Route} key={option.Route}>{option.Description}</option>;
+                return <option 
+                            value={option.Description} 
+                            name={option.Description} 
+                            id={option.Route} 
+                            key={option.Route}
+                            role="option"
+                            data-testid="select-option" > 
+                            {option.Description} 
+                        </option>;
             })}
         </select>
 

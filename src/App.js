@@ -11,6 +11,7 @@ function App() {
     <BrowserRouter>
       <div className='navbar'>
         <h1>NexTrip</h1>
+        <h3>Real Time Departures</h3>
           <Link to="/" className='home-link'>Home</Link>
 
       </div>

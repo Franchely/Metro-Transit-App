@@ -41,6 +41,7 @@ export default function DirectionInput(props) {
         <select
             className='input'
             id='select-direction'
+            data-testid='select-direction'
             onChange={e => handleDirectionSelect(e)}
         >     
             <option disabled selected>
@@ -48,7 +49,13 @@ export default function DirectionInput(props) {
             </option>
 
             {directionOptions.map((option) => {
-                return <option value={option.Text} name={option.Text} id={option.Value} key={option.Value}>{option.Text}</option>;
+                return <option 
+                            value={option.Text} 
+                            name={option.Text} 
+                            id={option.Value} 
+                            key={option.Value}>
+                                {option.Text}
+                        </option>;
             })}
         </select> 
 

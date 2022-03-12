@@ -43,6 +43,7 @@ export default function StopsInput(props) {
         <select
             className='input'
             id='select-stop'
+            data-testid='select-stop'
             onChange={e => handleStopSelect(e)}
         >     
 
@@ -51,7 +52,13 @@ export default function StopsInput(props) {
             </option>
 
             {stopOptions.map((option) => {
-                return <option value={option.Text} name={option.Text} id={option.Value} key={option.Value}>{option.Text}</option>;
+                return <option 
+                            value={option.Text} 
+                            name={option.Text} 
+                            id={option.Value} 
+                            key={option.Value}>
+                                {option.Text}
+                        </option>;
             })}
         </select> 
 
@@ -61,6 +68,7 @@ export default function StopsInput(props) {
              }}
                 state={{stopName: stopName}} 
                 className='submit-button'
+                data-testid='submit-button'
             >
                 Submit
             </Link>
