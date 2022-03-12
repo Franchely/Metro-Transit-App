@@ -27,6 +27,8 @@ export default function DeparturesTable(props) {
             </thead>
             <tbody className='route-info-table-body'>
                 {
+                    props.departures.length > 0 ? 
+
                     props.departures.map((departure, index) => {
                         return <tr className='departure' key={index}>
                                     <td className='departure-route'>
@@ -44,6 +46,12 @@ export default function DeparturesTable(props) {
                                     </td>
                                </tr>
                     })
+
+                    :
+
+                    <div>
+                        <p className='no-departures'>No upcoming departures found.</p>
+                    </div>
                 }
             </tbody>
         </table>

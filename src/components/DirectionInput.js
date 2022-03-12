@@ -5,34 +5,32 @@ import StopsInput from './StopsInput'
 
 export default function DirectionInput(props) {
 
-    const [directionOptions, setDirectionOptions] = useState(null)
     const [selectedDirection, setSelectedDirection] = useState(null)
-    const [showStops, setShowStops] = useState(false)
- 
+    const [stopOptions, setStopOptions] = useState(null)
 
-    // Get list of directions
-    useEffect(() => {
-        Axios.get(`https://svc.metrotransit.org/NexTrip/Directions/${props.selectedRoute}?format=json`).then(
-          (response) => {
-            const directions = response.data;
-            setDirectionOptions(directions);
-          }
-        ).catch(error => {
-            window.alert("An error occurred. Please refresh the page.")
-            console.log(error)
-          });
-    }, [props.selectedRoute])
+     // Get list of stops once direction is chosen
+     useEffect(() => {
+         if(!!selectedDirection) {
+             Axios.get(`https://svc.metrotransit.org/NexTrip/Stops/${props.selectedRoute}/${selectedDirection}?format=json`).then(
+               (response) => {
+                 const stops = response.data;
+                 setStopOptions(stops);
+               }
+             ).catch(error => {
+                 window.alert("An error occurred. Please refresh the page.")
+               });
+         }
+    }, [selectedDirection])
 
     const handleDirectionSelect = (event) => {
         var direction = document.getElementsByName(event.target.value)
         setSelectedDirection(direction[0].id)
-        setShowStops(true)
     }
 
-    if (!directionOptions)
+    if (!props.directionOptions)
         return (
           <div>
-            <p>Loading...</p>
+            <p className='loading-select'>Loading...</p>
           </div>
         );
 
@@ -48,7 +46,7 @@ export default function DirectionInput(props) {
                 Select Direction...
             </option>
 
-            {directionOptions.map((option) => {
+            {props.directionOptions.map((option) => {
                 return <option 
                             value={option.Text} 
                             name={option.Text} 
@@ -59,10 +57,11 @@ export default function DirectionInput(props) {
             })}
         </select> 
 
-        {showStops === true ? 
+        {!!stopOptions ? 
 
             <StopsInput 
                 selectedDirection={selectedDirection} 
+                stopOptions={stopOptions}
                 selectedRoute={props.selectedRoute}/>
                 :
             null

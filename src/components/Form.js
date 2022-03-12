@@ -2,39 +2,43 @@ import React, { useState, useEffect} from 'react'
 import DirectionInput from './DirectionInput'
 import Axios from "axios"
 
-export default function Form() {
+
+export default function Form(props) {
 
     const [routeOptions, setRouteOptions] = useState(null)
     const [selectedRoute, setSelectedRoute] = useState(null)
-    const [showDirections, setShowDirections] = useState(false)
+    const [directionOptions, setDirectionOptions] = useState(null)
 
-    // Get list of routes
+    // Set route options on page load
     useEffect(() => {
-        Axios.get("https://svc.metrotransit.org/NexTrip/Routes?format=json").then(
-          (response) => {
-            const routes = response.data;
-            setRouteOptions(routes);
-          }
-        ).catch(error => {
-          window.alert("An error occurred. Please refresh the page.")
-          console.log(error)
-        });
-      }, [])
+        setRouteOptions(props.routeOptions)
+    }, [])
+
+     // Get list of directions once route is selected
+    useEffect(() => {
+        if (!!selectedRoute === true) {
+            Axios.get(`https://svc.metrotransit.org/NexTrip/Directions/${selectedRoute}?format=json`).then(
+              (response) => {
+                const directions = response.data;
+                setDirectionOptions(directions);
+              }
+            ).catch(error => {
+                window.alert("An error occurred. Please refresh the page.")
+              });
+        } 
+    }, [selectedRoute])
 
 
     const handleRouteSelect = (event) => {
         var route = document.getElementsByName(event.target.value)
-
         setSelectedRoute(route[0].id)
-        setShowDirections(true)
-
     }
 
     
     if (!routeOptions)
         return (
           <div>
-            <p>Loading...</p>
+            <p className='loading'>Loading...</p>
           </div>
         );
 
@@ -66,9 +70,9 @@ export default function Form() {
             })}
         </select>
 
-        {showDirections === true ? 
+        {!!directionOptions ? 
 
-            <DirectionInput selectedRoute={selectedRoute}/>
+            <DirectionInput selectedRoute={selectedRoute} directionOptions={directionOptions}/>
             :
             null
         }

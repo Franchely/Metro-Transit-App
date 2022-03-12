@@ -8,32 +8,19 @@ export default function StopsInput(props) {
     const [selectedStop, setSelectedStop] = useState(null)
     const [stopName, setStopName] = useState(null)
     const [allSelected, setAllSelected] = useState(false)
-    // const [departures, setDepartures] = useState(null)
-
-    // Get list of stops
-    useEffect(() => {
-        Axios.get(`https://svc.metrotransit.org/NexTrip/Stops/${props.selectedRoute}/${props.selectedDirection}?format=json`).then(
-          (response) => {
-            const stops = response.data;
-            setStopOptions(stops);
-          }
-        ).catch(error => {
-            window.alert("An error occurred. Please refresh the page.")
-            console.log(error)
-          });
-    }, [props.selectedDirection])
 
     const handleStopSelect = (event) => {
         var stop = document.getElementsByName(event.target.value)
         setSelectedStop(stop[0].id)
         setStopName(stop[0].value)
+        console.log(stop[0].value)
         setAllSelected(true)
     }
 
-    if (!stopOptions)
+    if (!props.stopOptions)
     return (
       <div>
-        <p>Loading...</p>
+        <p className='loading-select'>Loading...</p>
       </div>
     );
 
@@ -51,7 +38,7 @@ export default function StopsInput(props) {
                 Select Stop...
             </option>
 
-            {stopOptions.map((option) => {
+            {props.stopOptions.map((option) => {
                 return <option 
                             value={option.Text} 
                             name={option.Text} 
@@ -62,7 +49,7 @@ export default function StopsInput(props) {
             })}
         </select> 
 
-        {allSelected === true && !!stopName ?  
+        {allSelected && !!stopName ?  
              <Link to={{
                 pathname: `/departures/${props.selectedRoute}/${props.selectedDirection}/${selectedStop}`
              }}
