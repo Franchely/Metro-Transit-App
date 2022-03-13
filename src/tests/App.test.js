@@ -6,11 +6,12 @@ import Form from '../components/Form'
 import DirectionInput from '../components/DirectionInput';
 import StopsInput from '../components/StopsInput';
 import DeparturesTable from '../components/DeparturesTable';
+import Home from '../pages/Home'
 import {routes, directions21, stops1, departuresFINN} from './mockData'
 
 
 test('renders app', async () => {
-  render(<App />);
+  render(<Home />);
   const title = await screen.findByText('Search By Route');
   expect(title).toBeInTheDocument();
 });
@@ -30,84 +31,45 @@ test('can select route option from dropdown', async () => {
 
 test('can select direction option from dropdown', async () => {
   render(
-    <Form routeOptions={routes}>
       <DirectionInput selectedRoute={'21'} directionOptions={directions21}/>
-    </Form>
   )
-
-  // Select route
-  const select1 = await screen.findByTestId('select-route')
-  const option1 = await screen.findByRole('option', {name: 'Route 21'})
-  userEvent.selectOptions(select1, option1)
-
   // select direction
   const select = await screen.findByTestId('select-direction')
   const option = await screen.findByRole('option', {name: 'Westbound'})
   userEvent.selectOptions(select, option)
   expect(option.selected).toBe(true)
-
 })
 
 test('can select stop option from dropdown', async () => {
   render(
-    <Form routeOptions={routes}>
-      <DirectionInput selectedRoute={'21'} directionOptions={directions21}>
-        <StopsInput 
-          selectedDirection={'1'} 
-          stopOptions={stops1}
-          selectedRoute={'21'}>
-
-        </StopsInput>
-      </DirectionInput>
-    </Form>, {wrapper: MemoryRouter}
+   <StopsInput 
+      selectedDirection={'1'} 
+      stopOptions={stops1}
+      selectedRoute={'21'}>
+    </StopsInput>, {wrapper: MemoryRouter}
   )
 
-  // Select route
-  const select1 = await screen.findByTestId('select-route')
-  const option1 = await screen.findByRole('option', {name: 'Route 21'})
-  userEvent.selectOptions(select1, option1)
-
-  // select direction
-  const select2 = await screen.findByTestId('select-direction')
-  const option2 = await screen.findByRole('option', {name: 'Westbound'})
-  userEvent.selectOptions(select2, option2)
-
   // select stop
-  const select3 = await screen.findByTestId('select-stop')
-  const option3 = await screen.findByRole('option', {name: 'Summit Ave and Finn St'})
-  userEvent.selectOptions(select3, option3)
-  expect(option3.selected).toBe(true)
+  const select = await screen.findByTestId('select-stop')
+  const option = await screen.findByRole('option', {name: 'Summit Ave and Finn St'})
+  userEvent.selectOptions(select, option)
+  expect(option.selected).toBe(true)
 
 })
 
 test('submit button renders once all options are selected', async () => {
   render(
-    <Form routeOptions={routes}>
-      <DirectionInput selectedRoute={'21'} directionOptions={directions21}>
-        <StopsInput 
-          selectedDirection={'1'} 
-          stopOptions={stops1}
-          selectedRoute={'21'}>
-
-        </StopsInput>
-      </DirectionInput>
-    </Form>, {wrapper: MemoryRouter}
+    <StopsInput 
+      selectedDirection={'1'} 
+      stopOptions={stops1}
+      selectedRoute={'21'}>
+    </StopsInput>, {wrapper: MemoryRouter}
   )
 
-  // Select route
-  const select1 = await screen.findByTestId('select-route')
-  const option1 = await screen.findByRole('option', {name: 'Route 21'})
-  userEvent.selectOptions(select1, option1)
-
-  // select direction
-  const select2 = await screen.findByTestId('select-direction')
-  const option2 = await screen.findByRole('option', {name: 'Westbound'})
-  userEvent.selectOptions(select2, option2)
-
   // select stop
-  const select3 = await screen.findByTestId('select-stop')
-  const option3 = await screen.findByRole('option', {name: 'Summit Ave and Finn St'})
-  userEvent.selectOptions(select3, option3)
+  const select = await screen.findByTestId('select-stop')
+  const option = await screen.findByRole('option', {name: 'Summit Ave and Finn St'})
+  userEvent.selectOptions(select, option)
 
   const submitButton = await screen.findByTestId('submit-button')
   expect(submitButton).toBeInTheDocument();

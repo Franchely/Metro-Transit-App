@@ -51,7 +51,7 @@ export default function DeparturesTable(props) {
 
                     :
                     <tbody className='no-departures'>
-                        <p className='no-departures'>No upcoming departures found.</p>
+                        <tr className='no-departures'>No upcoming departures found.</tr>
                     </tbody>
                 }
         </table>

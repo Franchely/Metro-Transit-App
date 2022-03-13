@@ -40,10 +40,11 @@ export default function DirectionInput(props) {
             className='input'
             id='select-direction'
             data-testid='select-direction'
+            role='select'
             onChange={e => handleDirectionSelect(e)}
             defaultValue='Select Direction...'
         >     
-            <option disabled>
+            <option disabled >
                 Select Direction...
             </option>
 

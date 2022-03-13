@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import Axios from 'axios'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 export default function StopsInput(props) {
@@ -29,6 +28,7 @@ export default function StopsInput(props) {
             className='input'
             id='select-stop'
             data-testid='select-stop'
+            role='select'
             onChange={e => handleStopSelect(e)}
             defaultValue='Select Stop...'
         >     
