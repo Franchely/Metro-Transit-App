@@ -11,7 +11,7 @@ export default function DeparturesTable(props) {
 
   return (
     <div className='route-info-table-container'>
-        <table className='route-info-table'>
+        <table className='route-info-table' data-testid='route-info-table'>
             <thead className='route-info-table-header'>
                 <tr>
                     <th>
@@ -30,7 +30,7 @@ export default function DeparturesTable(props) {
                     props.departures.length > 0 ? 
 
                     props.departures.map((departure, index) => {
-                        return <tr className='departure' key={index}>
+                        return <tr className='departure' key={index} data-testid='departure'>
                                     <td className='departure-route'>
                                         {departure.Terminal ? 
                                         `${departure.Route}${departure.Terminal}` 
