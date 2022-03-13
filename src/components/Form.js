@@ -52,8 +52,9 @@ export default function Form(props) {
             role="select"
             onChange={e => handleRouteSelect(e)}
             data-testid="select-route"
+            defaultValue='Select Route...'
         >
-            <option disabled selected role="option">
+            <option disabled role="option">
                 Select Route...
             </option>
             

@@ -90,7 +90,7 @@ h3 {
 }
 
 .route-info-table {
-  display: flex;
+  display: table;
   justify-content: center;
   flex-direction: column;
   margin-top: 30px;
@@ -116,38 +116,32 @@ tbody {
   font-size: 20px;
 }
 
+tr {
+  width: inherit;
+  margin: 10px;
+}
+
 th {
-  padding: 10px;
+  padding: 10px 10px 10px 20px;
   color: white;
 }
 
-th + th {
-  padding-left: 160px;
-}
-
 td {
-  padding: 10px;
-}
-
-td + td {
-  padding-left: 150px;
+  padding: 10px 10px 10px 20px;
 }
 
 tr td:last-child {
   text-align: end;
+  padding-left: 150px;
+}
+
+tr th {
+  text-align: left;
 }
 
 tr th:last-child {
   text-align: end;
   margin-left: 20px;
-}
-
-tr th {
-  width: 100%;
-}
-
-tr th:first-child {
-  text-align: left;
 }
 
 tr td:first-child {

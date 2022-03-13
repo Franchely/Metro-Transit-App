@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 
 export default function StopsInput(props) {
 
-    const [stopOptions, setStopOptions] = useState(null)
     const [selectedStop, setSelectedStop] = useState(null)
     const [stopName, setStopName] = useState(null)
     const [allSelected, setAllSelected] = useState(false)
@@ -13,7 +12,6 @@ export default function StopsInput(props) {
         var stop = document.getElementsByName(event.target.value)
         setSelectedStop(stop[0].id)
         setStopName(stop[0].value)
-        console.log(stop[0].value)
         setAllSelected(true)
     }
 
@@ -32,9 +30,10 @@ export default function StopsInput(props) {
             id='select-stop'
             data-testid='select-stop'
             onChange={e => handleStopSelect(e)}
+            defaultValue='Select Stop...'
         >     
 
-            <option disabled selected>
+            <option disabled>
                 Select Stop...
             </option>
 
