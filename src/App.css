@@ -94,6 +94,7 @@ h3 {
   justify-content: center;
   flex-direction: column;
   margin-top: 30px;
+  margin-bottom: 30px;
   border: 2px solid rgb(192, 8, 8);
 }
 
