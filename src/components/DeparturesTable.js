@@ -4,7 +4,7 @@ export default function DeparturesTable(props) {
 
     if (!props.departures)
     return (
-      <div>
+      <div >
         <p className='no-departures'>No upcoming departures found.</p>
       </div>
     );
@@ -25,12 +25,13 @@ export default function DeparturesTable(props) {
                     </th>
                 </tr>
             </thead>
-            <tbody className='route-info-table-body'>
+            
                 {
                     props.departures.length > 0 ? 
 
                     props.departures.map((departure, index) => {
-                        return <tr className='departure' key={index} data-testid='departure'>
+                        return <tbody className='route-info-table-body'>
+                                <tr className='departure' key={index} data-testid='departure'>
                                     <td className='departure-route'>
                                         {departure.Terminal ? 
                                         `${departure.Route}${departure.Terminal}` 
@@ -45,15 +46,14 @@ export default function DeparturesTable(props) {
                                         
                                     </td>
                                </tr>
+                        </tbody>
                     })
 
                     :
-
-                    <div>
+                    <tbody className='no-departures'>
                         <p className='no-departures'>No upcoming departures found.</p>
-                    </div>
+                    </tbody>
                 }
-            </tbody>
         </table>
     </div>
   )

@@ -171,4 +171,5 @@ tr td:first-child {
 .no-departures {
   font-weight: bold;
   margin-left: 10px;
+  background-color: white;
 }
